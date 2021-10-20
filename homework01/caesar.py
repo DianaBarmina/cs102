@@ -1,46 +1,61 @@
 import typing as tp
 
 
-def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
-    """
-    Encrypts plaintext using a Caesar cipher.
-
-    >>> encrypt_caesar("PYTHON")
-    'SBWKRQ'
-    >>> encrypt_caesar("python")
-    'sbwkrq'
-    >>> encrypt_caesar("Python3.6")
-    'Sbwkrq3.6'
-    >>> encrypt_caesar("")
-    ''
-    """
-    ciphertext = ""
-    # PUT YOUR CODE HERE
-    return ciphertext
+encryption = ""
+dencryption = ""
+shift = 3
 
 
-def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
-    """
-    Decrypts a ciphertext using a Caesar cipher.
+def encrypt_caesar(shift, encryption):
 
-    >>> decrypt_caesar("SBWKRQ")
-    'PYTHON'
-    >>> decrypt_caesar("sbwkrq")
-    'python'
-    >>> decrypt_caesar("Sbwkrq3.6")
-    'Python3.6'
-    >>> decrypt_caesar("")
-    ''
-    """
-    plaintext = ""
-    # PUT YOUR CODE HERE
-    return plaintext
+    ciphertext = "Python3.6"
+
+    for cip in ciphertext:
+        if cip.isupper():
+            cip_unicode = ord(cip)
+            cip_index = ord(cip) - ord("A")
+            new_index = (cip_index + shift) % 26
+            new_unicode = new_index + ord("A")
+            new_character = chr(new_unicode)
+            encryption += new_character
+        elif cip.islower():
+            cip_unicode = ord(cip)
+            cip_index = ord(cip) - ord("a")
+            new_index = (cip_index + shift) % 26
+            new_unicode = new_index + ord("a")
+            new_character = chr(new_unicode)
+            encryption += new_character
+        elif cip.isdigit():
+            encryption += cip
+        else:
+            encryption += cip
+
+    return encryption
 
 
-def caesar_breaker_brute_force(ciphertext: str, dictionary: tp.Set[str]) -> int:
-    """
-    Brute force breaking a Caesar cipher.
-    """
-    best_shift = 0
-    # PUT YOUR CODE HERE
-    return best_shift
+def decrypt_caesar(dencryption, shift):
+
+    plaintext = "SBWKrq6.9"
+
+    for cip in plaintext:
+        if cip.isupper():
+            cip_index = ord(cip) - ord("A")
+            cip_pos = (cip_index - shift) % 26 + ord("A")
+            cip_og = chr(cip_pos)
+            dencryption += cip_og
+        elif cip.islower():
+            cip_index = ord(cip) - ord("a")
+            cip_pos = (cip_index - shift) % 26 + ord("a")
+            cip_og = chr(cip_pos)
+            dencryption += cip_og
+        elif cip.isdigit():
+            dencryption += cip
+        else:
+            dencryption += cip
+    return dencryption
+
+
+res = encrypt_caesar(shift, encryption)
+res1 = decrypt_caesar(dencryption, shift)
+
+print(res, res1)
