@@ -24,8 +24,6 @@ def encrypt_caesar(shift, encryption):
             new_unicode = new_index + ord("a")
             new_character = chr(new_unicode)
             encryption += new_character
-        elif cip.isdigit():
-            encryption += cip
         else:
             encryption += cip
 
@@ -47,8 +45,6 @@ def decrypt_caesar(dencryption, shift):
             cip_pos = (cip_index - shift) % 26 + ord("a")
             cip_og = chr(cip_pos)
             dencryption += cip_og
-        elif cip.isdigit():
-            dencryption += cip
         else:
             dencryption += cip
     return dencryption
