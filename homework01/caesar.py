@@ -1,6 +1,5 @@
 import typing as tp
 
-
 encryption = ""
 dencryption = ""
 shift = 3
