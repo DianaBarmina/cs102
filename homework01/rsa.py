@@ -2,53 +2,53 @@ import random
 import typing as tp
 
 
-def is_prime(n: int) -> bool:
-    res1 = 0
-    for i in range(2, n // 2 + 1):
-        if n % i == 0:
-            res1 += 1
-    if res1 <= 0:
-        return True
-    else:
+def is_prime(num: int) -> bool:
+    result = 0
+    for i in range(2, num // 2 + 1):
+        if num % i == 0:
+            result += 1
+    if result > 0 or num <= 0:
         return False
+    else:
+        return True
 
 
-def gcd(a: int, b: int) -> int:
-    while a != 0 and b != 0:
-        if a >= b:
-            a %= b
+def gcd(num1: int, num2: int) -> int:
+    while num1 != 0 and num2 != 0:
+        if num1 >= num2:
+            num1 %= num2
         else:
-            b %= a
-    return a or b
+            num2 %= num1
+    return num1 or num2
 
 
-def multiplicative_inverse(t, h):
-    c = h
-    x, xx = 1, 0
-    while h:
-        q = t // h
-        t, h = h, t % h
-        x, xx = xx, x - xx * q
+def multiplicative_inverse(num1, num2):
+    copy_num2 = num2
+    nod, nod_help = 1, 0
+    while num2:
+        chastnoe = num1 // num2
+        num1, num2 = num2, num1 % num2
+        nod, nod_help = nod_help, nod - nod_help * chastnoe
 
-    x = x % c
-    return x
+    nod = nod % copy_num2
+    return nod
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
-    if not (is_prime(p) and is_prime(q)):
+    if not (is_prime(keynum1) == True and is_prime(keynum2) == True):
         raise ValueError("Both numbers must be prime.")
-    elif p == q:
-        raise ValueError("p and q cannot be equal")
+    elif keynum1 == keynum2:
+        raise ValueError("keynum1 and keynum2 cannot be equal")
     else:
-        m = p * q
-        phi = (p - 1) * (q - 1)
-        e = random.randrange(1, phi)
-        g = gcd(e, phi)
-        while g != 1:
-            e = random.randrange(1, phi)
-            g = gcd(e, phi)
-        d = multiplicative_inverse(e, phi)
-    return ((e, m), (d, m))
+        proisved = keynum1 * keynum2
+        eiler = (keynum1 - 1) * (keynum2 - 1)
+        randomnum1 = random.randrange(1, eiler)
+        gcd_num = gcd(randomnum1, eiler)
+        while gcd_num != 1:
+            randomnum2 = random.randrange(1, eiler)
+            gcd_num = gcd(randomnum2, eiler)
+        bezoutnum = multiplicative_inverse(randomnum2, eiler)
+        return ((randomnum2, proisved), (bezoutnum, proisved))
 
 
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
@@ -69,10 +69,10 @@ def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
 
 if __name__ == "__main__":
     print("RSA Encrypter/ Decrypter")
-    p = int(input("Enter a prime number (17, 19, 23, etc): "))
-    q = int(input("Enter another prime number (Not one you entered above): "))
+    keynum1 = int(input("Enter a prime number (17, 19, 23, etc): "))
+    keynum2 = int(input("Enter another prime number (Not one you entered above): "))
     print("Generating your public/private keypairs now . . .")
-    public, private = generate_keypair(p, q)
+    public, private = generate_keypair(keynum1, keynum2)
     print("Your public key is ", public, " and your private key is ", private)
     message = input("Enter a message to encrypt with your private key: ")
     encrypted_msg = encrypt(private, message)

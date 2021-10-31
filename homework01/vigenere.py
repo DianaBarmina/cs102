@@ -1,95 +1,33 @@
-list1 = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-]
-list2 = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-]
-text = "attackatdawn"
-text1 = "lxfopvefrnhr"
-shift = "lemon"
-
-
-def vigenere_cipher(text, shift):
-
+def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     encryption = ""
     i = 0
-    for cip in text:
+    for cip in plaintext:  # cip - буква из кодируемого слова
         if cip.isupper():
-            key = shift[i]
-            keys = list1.index(key)
-            res = ord(cip) - ord("A")
-            res1 = res + keys
-            res2 = chr(res1 % 26 + ord("A"))
-            encryption += res2
-            if len(shift) == 1:
+            key = keyword[i]
+            keys = ord(key) - ord("A")
+            cip_index = ord(cip) - ord("A")
+            new_unicode = cip_index + keys
+            new_character = chr(new_unicode % 26 + ord("A"))
+            encryption += new_character
+            if len(keyword) == 1:
                 i = i + 1
             else:
-                if i == len(shift) - 1:
+                if i == len(keyword) - 1:
                     i = 0
                 else:
                     i += 1
 
         elif cip.islower():
-            key = shift[i]
-            keys = list2.index(key)
-            res3 = ord(cip) - ord("a")
-            res4 = res3 + keys
-            res5 = chr(res4 % 26 + ord("a"))
-            encryption += res5
-            if len(shift) == 1:
+            key = keyword[i]
+            keys = ord(key) - ord("a")
+            cip_index1 = ord(cip) - ord("a")
+            new_unicode1 = cip_index1 + keys
+            new_character1 = chr(new_unicode1 % 26 + ord("a"))
+            encryption += new_character1
+            if len(keyword) == 1:
                 i = i
             else:
-                if i == len(shift) - 1:
+                if i == len(keyword) - 1:
                     i = 0
                 else:
                     i += 1
@@ -99,35 +37,35 @@ def vigenere_cipher(text, shift):
     return encryption
 
 
-def descrypt_vigenere(text1, shift):
+def descrypt_vigenere(ciphertext: str, keyword: str) -> str:
     dencryption = ""
     i = 0
-    for cip in text1:
+    for cip in ciphertext:  # cip - буква из раскодируемого слова
         if cip.isupper():
-            key = shift[i]
-            keys = list1.index(key)
-            res = ord(cip) - ord("A")
-            res1 = (res - keys) % 26 + ord("A")
-            res2 = chr(res1)
-            dencryption += res2
-            if len(shift) == 1:
+            key = keyword[i]
+            keys = ord(key) - ord("A")
+            cip_index = ord(cip) - ord("A")
+            old_unicode = (cip_index - keys) % 26 + ord("A")
+            old_character = chr(old_unicode)
+            dencryption += old_character
+            if len(keyword) == 1:
                 i = i + 1
             else:
-                if i == len(shift) - 1:
+                if i == len(keyword) - 1:
                     i = 0
                 else:
                     i += 1
         elif cip.islower():
-            key = shift[i]
-            keys = list2.index(key)
-            res3 = ord(cip) - ord("a")
-            res4 = res3 - keys
-            res5 = chr(res4 % 26 + ord("a"))
-            dencryption += res5
-            if len(shift) == 1:
+            key = keyword[i]
+            keys = ord(key) - ord("a")
+            cip_index1 = ord(cip) - ord("a")
+            old_unicode1 = cip_index1 - keys
+            old_character1 = chr(old_unicode1 % 26 + ord("a"))
+            dencryption += old_character1
+            if len(keyword) == 1:
                 i = i
             else:
-                if i == len(shift) - 1:
+                if i == len(keyword) - 1:
                     i = 0
                 else:
                     i += 1
@@ -137,5 +75,6 @@ def descrypt_vigenere(text1, shift):
     return dencryption
 
 
-print(vigenere_cipher(text, shift))
-print(descrypt_vigenere(text1, shift))
+if __name__ == "__main__":
+    print(encrypt_vigenere("attackatdawn", "lemon"))
+    print(descrypt_vigenere("lxfopvefrnhr", "lemon"))

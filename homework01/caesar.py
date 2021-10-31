@@ -1,15 +1,6 @@
-import typing as tp
-
-encryption = ""
-dencryption = ""
-shift = 3
-
-
-def encrypt_caesar(shift, encryption):
-
-    ciphertext = "Python3.6"
-
-    for cip in ciphertext:
+def encrypt_caesar(ciphertext: str, shift: int = 3) -> str:
+    encryption = ""
+    for cip in ciphertext:  # cip - буква из кодируемого слова
         if cip.isupper():
             cip_unicode = ord(cip)
             cip_index = ord(cip) - ord("A")
@@ -30,27 +21,23 @@ def encrypt_caesar(shift, encryption):
     return encryption
 
 
-def decrypt_caesar(dencryption, shift):
-
-    plaintext = "SBWKrq6.9"
-
-    for cip in plaintext:
+def decrypt_caesar(plaintext: str, shift: int = 3) -> str:
+    dencryption = ""
+    for cip in plaintext:  # cip - буква из раскодируемого слова
         if cip.isupper():
             cip_index = ord(cip) - ord("A")
-            cip_pos = (cip_index - shift) % 26 + ord("A")
-            cip_og = chr(cip_pos)
-            dencryption += cip_og
+            old_unicode = (cip_index - shift) % 26 + ord("A")
+            old_character = chr(old_unicode)
+            dencryption += old_character
         elif cip.islower():
-            cip_index = ord(cip) - ord("a")
-            cip_pos = (cip_index - shift) % 26 + ord("a")
-            cip_og = chr(cip_pos)
-            dencryption += cip_og
+            cip_index1 = ord(cip) - ord("a")
+            cip_pos = (cip_index1 - shift) % 26 + ord("a")
+            old_character1 = chr(cip_pos)
+            dencryption += old_character1
         else:
             dencryption += cip
     return dencryption
 
 
-res = encrypt_caesar(shift, encryption)
-res1 = decrypt_caesar(dencryption, shift)
-
-print(res, res1)
+if __name__ == "__main__":
+    print(encrypt_caesar("Python3.6", 3), decrypt_caesar("SBWKrq6.9", 3))
