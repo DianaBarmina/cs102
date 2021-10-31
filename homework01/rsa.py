@@ -5,7 +5,7 @@ import typing as tp
 def is_prime(num: int) -> bool:
     result = 0
     for i in range(2, num // 2 + 1):
-        if num % i == 0:
+        if (num % i == 0):
             result += 1
     if result > 0 or num <= 0:
         return False
@@ -34,21 +34,21 @@ def multiplicative_inverse(num1, num2):
     return nod
 
 
-def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
+def generate_keypair(keynum1: int, keynum2: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
     if not (is_prime(keynum1) == True and is_prime(keynum2) == True):
         raise ValueError("Both numbers must be prime.")
     elif keynum1 == keynum2:
         raise ValueError("keynum1 and keynum2 cannot be equal")
-    else:
-        proisved = keynum1 * keynum2
-        eiler = (keynum1 - 1) * (keynum2 - 1)
-        randomnum1 = random.randrange(1, eiler)
-        gcd_num = gcd(randomnum1, eiler)
-        while gcd_num != 1:
-            randomnum2 = random.randrange(1, eiler)
-            gcd_num = gcd(randomnum2, eiler)
-        bezoutnum = multiplicative_inverse(randomnum2, eiler)
-        return ((randomnum2, proisved), (bezoutnum, proisved))
+    proisved = keynum1 * keynum2
+    eiler = (keynum1 - 1) * (keynum2 - 1)
+    randomnum1 = random.randrange(1, eiler)
+    gcd_num = gcd(randomnum1, eiler)
+    while gcd_num != 1:
+        randomnum2 = random.randrange(1, eiler)
+        gcd_num = gcd(randomnum2, eiler)
+    bezoutnum = multiplicative_inverse(randomnum2, eiler)
+    return ((randomnum2, proisved), (bezoutnum, proisved))
+
 
 
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
