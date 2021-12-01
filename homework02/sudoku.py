@@ -54,7 +54,7 @@ def get_row(values: list, pos: tuple) -> Any:
     ['.', '8', '9']
     """
     i = pos[0]
-    return grid[i]
+    return values[i]
 
 
 def get_col(values: list, pos: tuple) -> list:
