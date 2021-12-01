@@ -8,6 +8,9 @@ from typing import Any
 def read_sudoku(filename: Any) -> Any:
     """Прочитать Судоку из указанного файла
 
+def read_sudoku(filename: Any) -> Any:
+    """Прочитать Судоку из указанного файла
+
     Cделала программу read_sudoku and create_grid в одной"""
     
     digits = [c for c in open(filename).read() if c in "123456789."]
