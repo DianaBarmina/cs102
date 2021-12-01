@@ -138,18 +138,17 @@ def find_possible_values(grid: list, pos: tuple) -> set:
     # print(vertical)
     block = get_block(grid, pos)
     # print(block)
-    new_value_list = []
-    list_val = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    list_same = []
+    list_val = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
+    list_same = set()
     for j in list_val:
         for i in range(0, 9):
             if gorisontal[i] == j:
-                list_same.append(j)
+                list_same.add(j)
             if vertical[i] == j:
-                list_same.append(j)
+                list_same.add(j)
             if block[i] == j:
-                list_same.append(j)
-    list_val, list_same = set(list_val), set(list_same)
+                list_same.add(j)
+    #    list_val, list_same = set(list_val), set(list_same)
     return list_val.difference(list_same)
 
 
@@ -224,4 +223,3 @@ if __name__ == "__main__":
             print(f"Puzzle {fname} can't be solved")
         else:
             display(solution)
-    
