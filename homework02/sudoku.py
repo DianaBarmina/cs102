@@ -1,9 +1,9 @@
 import pathlib
 import typing as tp
-
-T = tp.TypeVar("T")
 import random
 from typing import Any
+
+T = tp.TypeVar("T")
 
 def read_sudoku(filename: Any) -> Any:
     """Прочитать Судоку из указанного файла
