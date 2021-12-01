@@ -70,7 +70,7 @@ def get_col(values: list, pos: tuple) -> list:
     i = pos[1]
     col = []
     for j in range(0, 9):
-        list_in_list = grid[j]
+        list_in_list = values[j]
         num = list_in_list[i]
         col.append(num)
     return col
@@ -100,7 +100,7 @@ def get_block(values: list, pos: tuple) -> list:
 
     for i in range(row_start, row_end):
         for n in range(col_start, col_end):
-            result.append(grid[i][n])
+            result.append(values[i][n])
 
     return result
 
