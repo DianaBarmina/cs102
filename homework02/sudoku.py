@@ -7,10 +7,6 @@ T = tp.TypeVar("T")
 
 
 def read_sudoku(filename: Any) -> Any:
-    """Прочитать Судоку из указанного файла"""
-
-
-def read_sudoku(filename: Any) -> Any:
     """Прочитать Судоку из указанного файла
 
     Cделала программу read_sudoku and create_grid в одной"""
@@ -20,7 +16,7 @@ def read_sudoku(filename: Any) -> Any:
     return grid
 
 
-def display(grid: tp.List[tp.List[str]]) -> None:
+def display(values: Any) -> Any:
     """Вывод Судоку"""
     width = 2
     line = "+".join(["-" * (width * 3)] * 3)
@@ -47,7 +43,7 @@ def group(values: list, n: int) -> list:
     return [values[i : i + n] for i in range(0, len(values), n)]
 
 
-def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
+def get_row(values: list, pos: tuple) -> Any:
     """Возвращает все значения для номера строки, указанной в pos
 
     >>> get_row([['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']], (0, 0))
@@ -61,7 +57,7 @@ def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     return grid[i]
 
 
-def get_col(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
+def get_col(values: list, pos: tuple) -> list:
     """Возвращает все значения для номера столбца, указанного в pos
 
     >>> get_col([['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']], (0, 0))
@@ -80,7 +76,7 @@ def get_col(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     return col
 
 
-def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
+def get_block(values: list, pos: tuple) -> list:
     """Возвращает все значения из квадрата, в который попадает позиция pos
 
     >>> grid = read_sudoku('puzzle1.txt')
@@ -228,3 +224,4 @@ if __name__ == "__main__":
             print(f"Puzzle {fname} can't be solved")
         else:
             display(solution)
+    
