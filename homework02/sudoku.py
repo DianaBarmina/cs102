@@ -5,6 +5,7 @@ T = tp.TypeVar("T")
 import random
 from typing import Any
 
+
 def read_sudoku(filename: Any) -> Any:
     """Прочитать Судоку из указанного файла
 
