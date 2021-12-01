@@ -67,13 +67,14 @@ def get_col(values: list, pos: tuple) -> list:
     >>> get_col([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (0, 2))
     ['3', '6', '9']
     """
-    i = pos[1]
+    """i = pos[1]
     col = []
     for j in range(0, 9):
         list_in_list = values[j]
         num = list_in_list[i]
-        col.append(num)
-    return col
+        col.append(num)"""
+    
+    return [values[i][pos[1]] for i in range(len(values))]
 
 
 def get_block(values: list, pos: tuple) -> list:
