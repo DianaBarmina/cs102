@@ -73,7 +73,7 @@ def get_col(values: list, pos: tuple) -> list:
         list_in_list = values[j]
         num = list_in_list[i]
         col.append(num)"""
-    
+
     return [values[i][pos[1]] for i in range(len(values))]
 
 
