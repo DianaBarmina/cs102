@@ -225,4 +225,5 @@ if __name__ == "__main__":
             else:
                 display(solution)
         except:
+            print(f"Puzzle {fname} can't be solved")
             pass
