@@ -120,12 +120,12 @@ def check_solution(solution: list) -> bool:
 
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
-    
+
     grid: tp.List[tp.List[str]] = []
     grid = [[] for i in range(0, 9)]
     for k in range(0, 9):
         grid[k] = ["." for i in range(0, 9)]
-        
+
     N = 81 - min(81, N)
 
     while N:
@@ -135,7 +135,6 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
             grid[row][col] = "."
             N -= 1
     return grid
-
 
 if __name__ == "__main__":
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
