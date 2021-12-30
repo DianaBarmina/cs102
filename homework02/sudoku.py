@@ -33,6 +33,7 @@ def group(values: list, n: int) -> list:
 
 
 def get_row(values: list, pos: tuple) -> Any:
+
     i = pos[0]
     return values[i]
 
@@ -82,8 +83,8 @@ def find_possible_values(grid: list, pos: tuple) -> set:
     )
 
 
+def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
-def solve(grid: list) -> list:
     position = find_empty_positions(grid)
     if not position:
         return grid
@@ -94,11 +95,11 @@ def solve(grid: list) -> list:
         if solution:
             return solution
     grid[row][col] = "."
-    return []
+    return None
 
 
 def check_solution(solution: list) -> bool:
-    # TODO: Add doctests with bad puzzles
+
     for row in range(len(solution)):
         values = set(get_row(solution, (row, 0)))
         if values != set("123456789"):
