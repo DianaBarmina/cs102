@@ -136,6 +136,7 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
             N -= 1
     return grid
 
+
 if __name__ == "__main__":
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
         try:
