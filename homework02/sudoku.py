@@ -75,11 +75,12 @@ def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Tuple[int, int]:
 def find_possible_values(grid: list, pos: tuple) -> set:
     pos_val = ("1", "2", "3", "4", "5", "6", "7", "8", "9")
     return (
-            set(pos_val)
-            - set(str(get_block(grid, pos)))
-            - set(str(get_col(grid, pos)))
-            - set(str(get_row(grid, pos)))
+        set(pos_val)
+        - set(str(get_block(grid, pos)))
+        - set(str(get_col(grid, pos)))
+        - set(str(get_row(grid, pos)))
     )
+
 
 
 def solve(grid: list) -> list:
