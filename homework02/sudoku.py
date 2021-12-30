@@ -119,7 +119,7 @@ def check_solution(solution: list) -> bool:
     return True
 
 
-def generate_sudoku(N: int) -> list:
+def generate_sudoku(N: int):
 
     grid = solve([["."] * 9 for _ in range(9)])
     N = 81 - min(81, N)
