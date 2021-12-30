@@ -119,9 +119,13 @@ def check_solution(solution: list) -> bool:
     return True
 
 
-def generate_sudoku(N: int):
-
-    grid = solve([["."] * 9 for _ in range(9)])
+def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
+    
+    grid: tp.List[tp.List[str]] = []
+    grid = [[] for i in range(0, 9)]
+    for k in range(0, 9):
+        grid[k] = ["." for i in range(0, 9)]
+        
     N = 81 - min(81, N)
 
     while N:
