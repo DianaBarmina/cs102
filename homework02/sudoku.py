@@ -83,7 +83,7 @@ def find_possible_values(grid: list, pos: tuple) -> set:
     return values
 
 
-def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
+def solve(grid: tp.List[tp.List[str]]) -> tp.List[tp.List[str]]:
 
     position = find_empty_positions(grid)
     # print(position)
@@ -97,7 +97,7 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
         if solution:
             return solution
     grid[row][col] = "."
-    return None
+    return []
 
 
 def check_solution(solution: list) -> bool:
@@ -122,13 +122,8 @@ def check_solution(solution: list) -> bool:
 
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
-
-    grid: tp.List[tp.List[str]]
-    grid = [[] for i in range(0, 9)]
-    for i in range(0, 9):
-        grid[i] = ["." for j in range(0, 9)]
-
-    # grid = solve([["."] * 9 for i in range(9)])
+    grid: tp.List[tp.List[str]] = []
+    grid = solve([["."] * 9 for i in range(9)])
     N = 81 - min(81, N)
 
     while N:
