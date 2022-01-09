@@ -63,7 +63,6 @@ def get_block(values: list, pos: tuple) -> list:
 
 
 def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Tuple[int, int]:
-
     for i in grid:
         if "." in i:
             empty_pos = (grid.index(i), i.index("."))
@@ -75,20 +74,23 @@ def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Tuple[int, int]:
 
 def find_possible_values(grid: list, pos: tuple) -> set:
     pos_val = ("1", "2", "3", "4", "5", "6", "7", "8", "9")
-    return (
+    values = (
         set(pos_val)
         - set(str(get_block(grid, pos)))
         - set(str(get_col(grid, pos)))
         - set(str(get_row(grid, pos)))
     )
+    return values
 
 
 def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
     position = find_empty_positions(grid)
-    if not position:
+    # print(position)
+    if position == (-1, -1):
         return grid
     row, col = position
+    # print(find_possible_values(grid, position))
     for value in find_possible_values(grid, position):
         grid[row][col] = value
         solution = solve(grid)
@@ -121,11 +123,12 @@ def check_solution(solution: list) -> bool:
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
 
-    grid: tp.List[tp.List[str]] = []
+    grid: tp.List[tp.List[str]]
     grid = [[] for i in range(0, 9)]
-    for k in range(0, 9):
-        grid[k] = ["." for i in range(0, 9)]
+    for i in range(0, 9):
+        grid[i] = ["." for j in range(0, 9)]
 
+    # grid = solve([["."] * 9 for i in range(9)])
     N = 81 - min(81, N)
 
     while N:
@@ -133,20 +136,16 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
         col = random.randint(0, 8)
         if grid[row][col] != ".":
             grid[row][col] = "."
-            N = N - 1
+            N -= 1
     return grid
 
 
 if __name__ == "__main__":
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
-        try:
-            grid = read_sudoku(fname)
-            display(grid)
-            solution = solve(grid)
-            if not solution:
-                print(f"Puzzle {fname} can't be solved")
-            else:
-                display(solution)
-        except:
+        grid = read_sudoku(fname)
+        display(grid)
+        solution = solve(grid)
+        if not solution:
             print(f"Puzzle {fname} can't be solved")
-            pass
+        else:
+            display(solution)
