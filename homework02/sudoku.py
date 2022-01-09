@@ -133,7 +133,7 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
         col = random.randint(0, 8)
         if grid[row][col] != ".":
             grid[row][col] = "."
-            N -= 1
+            N = N - 1
     return grid
 
 
