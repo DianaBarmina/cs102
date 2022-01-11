@@ -1,7 +1,7 @@
 import pathlib
 import random
-from random import choice
 import typing as tp
+from random import choice
 
 import pygame
 from pygame.locals import *
@@ -13,10 +13,10 @@ Grid = tp.List[Cells]
 
 class GameOfLife:
     def __init__(
-        self,
-        size: tp.Tuple[int, int],
-        randomize: bool = True,
-        max_generations: tp.Optional[float] = float("inf"),
+            self,
+            size: tp.Tuple[int, int],
+            randomize: bool = True,
+            max_generations: tp.Optional[float] = float("inf"),
     ) -> None:
         # Размер клеточного поля
         self.rows, self.cols = size
@@ -29,13 +29,18 @@ class GameOfLife:
         # Текущее число поколений
         self.generations = 1
 
+
     def create_grid(self, randomize: bool = False) -> Grid:
         # Copy from previous assignment
 
         if randomize:
-            field = [[choice([0, 1]) for x in range(self.cols)] for y in range(self.rows)]
+            field = [
+                [choice([0, 1]) for x in range(self.cols)] for y in range(self.rows)
+            ]
         else:
-            field = [[0 for x in range(self.cols)] for y in range(self.rows)]
+            field = [
+                [0 for x in range(self.cols)] for y in range(self.rows)
+            ]
 
         return field
 
@@ -89,6 +94,7 @@ class GameOfLife:
 
         self.generations += 1
 
+
     @property
     def is_max_generations_exceeded(self) -> bool:
         """
@@ -116,17 +122,18 @@ class GameOfLife:
         Прочитать состояние клеток из указанного файла.
         """
         grid = []
-        with open(filename, "r", encoding="utf-8") as f:
+        with open(filename, "r", encoding='utf-8') as f:
             grid = [[int(j) for j in i.strip()] for i in f]
 
         life = GameOfLife((len(grid), len(grid[0])))
         life.curr_generation = grid
         return life
 
+
     def save(self, filename: pathlib.Path) -> None:
         """
         Сохранить текущее состояние клеток в указанный файл.
         """
-        with open(filename, "w+", encoding="utf-8") as f:
+        with open(filename, "w+", encoding='utf-8') as f:
             for i in self.curr_generation:
-                f.write("".join(map(str, i)) + "\n")
+                f.write("".join(map(str, i)) + '\n')
