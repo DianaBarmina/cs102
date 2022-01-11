@@ -95,37 +95,27 @@ class GameOfLife:
                     (x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size),
                 )
 
-
     def get_neighbours(self, cell: Cell):
 
         nei_list = []
-        
         if self.height - 1 >= cell[0] > 0:
             nei_list.append(self.grids[cell[0] - 1][cell[1]])
-
         if 0 <= cell[0] < self.cell_height - 1:
             nei_list.append(self.grids[cell[0] + 1][cell[1]])
-
         if self.width - 1 >= cell[1] > 0:
             nei_list.append(self.grids[cell[0]][cell[1] - 1])
-
         if 0 <= cell[1] < self.cell_width - 1:
             nei_list.append(self.grids[cell[0]][cell[1] + 1])
-            
         if self.height - 1 >= cell[0] > 0 and self.width - 1 >= cell[1] > 0:
             nei_list.append(self.grids[cell[0] - 1][cell[1] - 1])
-            
         if self.height - 1 >= cell[0] > 0 and 0 <= cell[1] < self.cell_width - 1:
             nei_list.append(self.grids[cell[0] - 1][cell[1] + 1])
-            
         if 0 <= cell[0] < self.cell_height - 1 and self.width - 1 >= cell[1] > 0:
             nei_list.append(self.grids[cell[0] + 1][cell[1] - 1])
-            
         if 0 <= cell[0] < self.cell_height - 1 and 0 <= cell[1] < self.cell_width - 1:
             nei_list.append(self.grids[cell[0] + 1][cell[1] + 1])
-            
         return nei_list
-    
+
     def get_next_generation(self) -> Grid:
         buffer = self.create_grid(randomize=False)
         field = self.grids
