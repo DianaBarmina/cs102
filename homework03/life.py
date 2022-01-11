@@ -1,9 +1,9 @@
 import pathlib
 import random
 import typing as tp
-import pygame
-
 from random import choice
+
+import pygame
 from pygame.locals import *
 
 Cell = tp.Tuple[int, int]
@@ -28,6 +28,7 @@ class GameOfLife:
         self.max_generations = max_generations
         # Текущее число поколений
         self.generations = 1
+
 
     def create_grid(self, randomize: bool = False) -> Grid:
         # Copy from previous assignment
@@ -89,6 +90,7 @@ class GameOfLife:
 
         self.generations += 1
 
+
     @property
     def is_max_generations_exceeded(self) -> bool:
         """
@@ -122,6 +124,7 @@ class GameOfLife:
         life = GameOfLife((len(grid), len(grid[0])))
         life.curr_generation = grid
         return life
+
 
     def save(self, filename: pathlib.Path) -> None:
         """
