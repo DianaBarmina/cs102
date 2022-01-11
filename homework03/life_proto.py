@@ -59,7 +59,6 @@ class GameOfLife:
                 if event.type == pygame.QUIT:
                     running = False
 
-
             # Отрисовка списка клеток
             # Выполнение одного шага игры (обновление состояния ячеек)
             # PUT YOUR CODE HERE
@@ -74,12 +73,13 @@ class GameOfLife:
     def create_grid(self, randomize: bool = False) -> Grid:
 
         if randomize:
-            field = [[choice([0, 1]) for x in range(self.cell_width)] for y in range(self.cell_height)]
+            field = [
+                [choice([0, 1]) for x in range(self.cell_width)] for y in range(self.cell_height)
+            ]
         else:
             field = [[0 for x in range(self.cell_width)] for y in range(self.cell_height)]
 
         return field
-
 
     def draw_grid(self) -> None:
 
@@ -92,7 +92,7 @@ class GameOfLife:
                 pygame.draw.rect(
                     self.screen,
                     pygame.Color(colour),
-                    (x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size)
+                    (x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size),
                 )
 
 
@@ -117,7 +117,7 @@ class GameOfLife:
             
         if self.height - 1 >= cell[0] > 0 and 0 <= cell[1] < self.cell_width - 1:
             nei_list.append(self.grids[cell[0] - 1][cell[1] + 1])
-             
+            
         if 0 <= cell[0] < self.cell_height - 1 and self.width - 1 >= cell[1] > 0:
             nei_list.append(self.grids[cell[0] + 1][cell[1] - 1])
             

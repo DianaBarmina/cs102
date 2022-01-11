@@ -29,7 +29,6 @@ class GameOfLife:
         # Текущее число поколений
         self.generations = 1
 
-
     def create_grid(self, randomize: bool = False) -> Grid:
         # Copy from previous assignment
 
@@ -90,7 +89,6 @@ class GameOfLife:
 
         self.generations += 1
 
-
     @property
     def is_max_generations_exceeded(self) -> bool:
         """
@@ -124,7 +122,6 @@ class GameOfLife:
         life = GameOfLife((len(grid), len(grid[0])))
         life.curr_generation = grid
         return life
-
 
     def save(self, filename: pathlib.Path) -> None:
         """
