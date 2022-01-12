@@ -132,6 +132,7 @@ class GameOfLife:
         # assert isinstance(field, object)
         return field
 
+
 if __name__ == "__main__":
     game = GameOfLife(640, 480, 10, 1)
     game.run()

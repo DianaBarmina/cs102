@@ -130,6 +130,6 @@ class GameOfLife:
             for i in self.curr_generation:
                 f.write("".join(map(str, i)) + "\n")
 
+
 if __name__ == "__main__":
     game = GameOfLife((10, 10), max_generations=50)
-    #print(game.get_next_generation())
