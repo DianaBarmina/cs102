@@ -1,6 +1,5 @@
 import random
 import typing as tp
-
 from random import choice
 from typing import List, Type
 
