@@ -130,4 +130,3 @@ class GameOfLife:
         with open(filename, "w+", encoding="utf-8") as f:
             for i in self.curr_generation:
                 f.write("".join(map(str, i)) + "\n")
-                
