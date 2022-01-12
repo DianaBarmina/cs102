@@ -1,6 +1,6 @@
 import random
 import typing as tp
-import zoneinfo
+#import zoneinfo
 from random import choice
 from typing import List, Type
 
@@ -27,7 +27,6 @@ class GameOfLife:
         self.screen = pygame.display.set_mode(self.screen_size)
 
         self.grids: tp.List[tp.List[int]] = []
-        self.active_grid = 0
         # Вычисляем количество ячеек по вертикали и горизонтали
         self.cell_width = self.width // self.cell_size
         self.cell_height = self.height // self.cell_size
@@ -51,7 +50,7 @@ class GameOfLife:
 
         # Создание списка клеток
         # PUT YOUR CODE HERE
-        self.grids = self.create_grid(randomize=True)
+        self.grid = self.create_grid(randomize=True)
 
         running = True
         while running:
@@ -64,7 +63,7 @@ class GameOfLife:
             # PUT YOUR CODE HERE
             self.draw_grid()
             self.draw_lines()
-            self.grids = self.get_next_generation()
+            self.grid = self.get_next_generation()
 
             pygame.display.flip()
             clock.tick(self.speed)
@@ -85,7 +84,7 @@ class GameOfLife:
 
         for y in range(self.cell_height):
             for x in range(self.cell_width):
-                if self.grids[y][x] != 1:
+                if self.grid[y][x] != 1:
                     colour = "white"
                 else:
                     colour = "green"
@@ -99,26 +98,26 @@ class GameOfLife:
 
         nei_list = []
         if self.height - 1 >= cell[0] > 0:
-            nei_list.append(self.grids[cell[0] - 1][cell[1]])
+            nei_list.append(self.grid[cell[0] - 1][cell[1]])
         if 0 <= cell[0] < self.cell_height - 1:
-            nei_list.append(self.grids[cell[0] + 1][cell[1]])
+            nei_list.append(self.grid[cell[0] + 1][cell[1]])
         if self.width - 1 >= cell[1] > 0:
-            nei_list.append(self.grids[cell[0]][cell[1] - 1])
+            nei_list.append(self.grid[cell[0]][cell[1] - 1])
         if 0 <= cell[1] < self.cell_width - 1:
-            nei_list.append(self.grids[cell[0]][cell[1] + 1])
+            nei_list.append(self.grid[cell[0]][cell[1] + 1])
         if self.height - 1 >= cell[0] > 0 and self.width - 1 >= cell[1] > 0:
             nei_list.append(self.grids[cell[0] - 1][cell[1] - 1])
         if self.height - 1 >= cell[0] > 0 and 0 <= cell[1] < self.cell_width - 1:
-            nei_list.append(self.grids[cell[0] - 1][cell[1] + 1])
+            nei_list.append(self.grid[cell[0] - 1][cell[1] + 1])
         if 0 <= cell[0] < self.cell_height - 1 and self.width - 1 >= cell[1] > 0:
-            nei_list.append(self.grids[cell[0] + 1][cell[1] - 1])
+            nei_list.append(self.grid[cell[0] + 1][cell[1] - 1])
         if 0 <= cell[0] < self.cell_height - 1 and 0 <= cell[1] < self.cell_width - 1:
-            nei_list.append(self.grids[cell[0] + 1][cell[1] + 1])
+            nei_list.append(self.grid[cell[0] + 1][cell[1] + 1])
         return nei_list
 
     def get_next_generation(self) -> Grid:
         buffer = self.create_grid(randomize=False)
-        field = self.grids
+        field = self.grid
         for y in range(self.cell_height):
             for x in range(self.cell_width):
                 c = field[y][x]
@@ -132,7 +131,6 @@ class GameOfLife:
         field = buffer
         # assert isinstance(field, object)
         return field
-
 
 if __name__ == "__main__":
     game = GameOfLife(640, 480, 10, 1)

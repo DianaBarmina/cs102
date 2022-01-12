@@ -42,31 +42,30 @@ class GameOfLife:
     def get_neighbours(self, cell: Cell):
         # Copy from previous assignment
         nei_list = []
-        if cell[0] > 0 and cell[1] == 0:
+        if self.cols - 1 >= cell[0] > 0:
             nei_list.append(self.curr_generation[cell[0] - 1][cell[1]])
-        if cell[0] > 0 and cell[1] > 0:
-            nei_list.append(self.curr_generation[cell[0] - 1][cell[1] - 1])
-        if cell[0] > 0 and cell[1] < self.rows - 1:
-            nei_list.append(self.curr_generation[cell[0] - 1][cell[1] + 1])
-        if cell[0] < self.cols - 1:
-            nei_list.append(self.curr_generation[cell[0] - 1][cell[1]])
-        if cell[0] < self.cols - 1 and cell[1] > 0:
-            nei_list.append(self.curr_generation[cell[0] + 1][cell[1] - 1])
-        if cell[0] < self.cols - 1 and cell[1] < self.rows - 1:
-            nei_list.append(self.curr_generation[cell[0] + 1][cell[1] + 1])
-        if cell[1] > 0:
+        if 0 <= cell[0] < self.cols - 1:
+            nei_list.append(self.curr_generation[cell[0] + 1][cell[1]])
+        if self.rows - 1 >= cell[1] > 0:
             nei_list.append(self.curr_generation[cell[0]][cell[1] - 1])
-        if cell[1] < self.rows - 1:
+        if 0 <= cell[1] < self.rows - 1:
             nei_list.append(self.curr_generation[cell[0]][cell[1] + 1])
-
+        if self.cols - 1 >= cell[0] > 0 and self.rows - 1 >= cell[1] > 0:
+            nei_list.append(self.curr_generation[cell[0] - 1][cell[1] - 1])
+        if self.cols - 1 >= cell[0] > 0 and 0 <= cell[1] < self.rows - 1:
+            nei_list.append(self.curr_generation[cell[0] - 1][cell[1] + 1])
+        if 0 <= cell[0] < self.cols - 1 and self.rows - 1 >= cell[1] > 0:
+            nei_list.append(self.curr_generation[cell[0] + 1][cell[1] - 1])
+        if 0 <= cell[0] < self.cols - 1 and 0 <= cell[1] < self.rows - 1:
+            nei_list.append(self.curr_generation[cell[0] + 1][cell[1] + 1])
         return nei_list
 
     def get_next_generation(self) -> Grid:
         # Copy from previous assignment
         buffer = self.create_grid(randomize=False)
         field = self.curr_generation
-        for y in range(self.rows):
-            for x in range(self.cols):
+        for y in range(self.cols):
+            for x in range(self.rows):
                 c = field[y][x]
                 cc = (y, x)
                 nei = self.get_neighbours(cc)
@@ -130,3 +129,7 @@ class GameOfLife:
         with open(filename, "w+", encoding="utf-8") as f:
             for i in self.curr_generation:
                 f.write("".join(map(str, i)) + "\n")
+
+if __name__ == "__main__":
+    game = GameOfLife((10, 10), max_generations=50)
+    #print(game.get_next_generation())
