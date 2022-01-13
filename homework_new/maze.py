@@ -32,7 +32,7 @@ def remove_wall(
             if cord_j != lenn_grid:
                 grid[cord_i][cord_j + 1] = " "
         else:
-            grid[cord_i - 1][cord_j] = " "
+            grid[cord_i - 1][cord_j] = " " 
     return grid
 
 
@@ -110,7 +110,7 @@ def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str,
                 if grid[row][col + 1] == 0:
                     grid[row][col + 1] = k + 1
                 if grid[row][col - 1] == 0:
-                    grid[row][col - 1] = k + 1
+                    grid[row][col - 1] = k + 1       
     return grid
 
 
@@ -208,11 +208,11 @@ def solve_maze(
     if not encircled_exit(grid, start) and not encircled_exit(grid, fin):
         grid[start[0]][start[1]] = 1
         grid[fin[0]][fin[1]] = 0
-        k = 1
+        k = 1 
         for row in range(len(grid) - 1):
             for col in range(len(grid[row]) - 1):
                 if grid[row][col] == " ":
-                    grid[row][col] = 0
+                    grid[row][col] = 0    
         while grid[fin[0]][fin[1]] == 0:
             grid = make_step(grid, k)
             k += 1
@@ -239,9 +239,9 @@ def add_path_to_grid(
 
 
 if __name__ == "__main__":
-    print(pd.DataFrame(bin_tree_maze(15, 15)))
+    #print(pd.DataFrame(bin_tree_maze(15, 15)))
     GRID = bin_tree_maze(15, 15)
-    print(pd.DataFrame(GRID))
+    #print(pd.DataFrame(GRID))
     _, PATH = solve_maze(GRID)
     MAZE = add_path_to_grid(GRID, PATH)
-    print(pd.DataFrame(MAZE))
+    #print(pd.DataFrame(MAZE))
