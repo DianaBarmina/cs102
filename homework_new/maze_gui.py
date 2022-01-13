@@ -17,9 +17,9 @@ def draw_maze(grid: List[List[str]], size: int = 10):
     for x, row in enumerate(grid):
         for y, cell in enumerate(row):
             if cell == " ":
-                color = 'White'
+                color = "White"
             elif cell == "■":
-                color = 'black'
+                color = "black"
             elif cell == "X":
                 color = "red"
             draw_cell(y, x, color, size)
