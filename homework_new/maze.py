@@ -239,9 +239,9 @@ def add_path_to_grid(
 
 
 if __name__ == "__main__":
-    #print(pd.DataFrame(bin_tree_maze(15, 15)))
+    print(pd.DataFrame(bin_tree_maze(15, 15)))
     GRID = bin_tree_maze(15, 15)
-    #print(pd.DataFrame(GRID))
+    print(pd.DataFrame(GRID))
     _, PATH = solve_maze(GRID)
     MAZE = add_path_to_grid(GRID, PATH)
-    #print(pd.DataFrame(MAZE))
+    print(pd.DataFrame(MAZE))
