@@ -42,7 +42,7 @@ if __name__ == "__main__":
     GRID = bin_tree_maze(N, M)
 
     window = tk.Tk()
-    window.title('Maze')
+    window.title("Maze")
     window.geometry("%dx%d" % (M * CELL_SIZE + 100, N * CELL_SIZE + 100))
 
     canvas = tk.Canvas(window, width=M * CELL_SIZE, height=N * CELL_SIZE)
@@ -52,4 +52,3 @@ if __name__ == "__main__":
     ttk.Button(window, text="Solve", command=show_solution).pack(pady=20)
 
     window.mainloop()
-
