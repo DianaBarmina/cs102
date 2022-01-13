@@ -167,7 +167,7 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
     :return:
     """
 
-    x, y = coord
+    i, j = coord
 
     if (
         coord != (0, 0)
@@ -175,17 +175,17 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
         and coord != (len(grid) - 1, 0)
         and coord != (len(grid[0]) - 1, len(grid) - 1)
     ):
-        if x == 0:
-            if grid[x + 1][y] == "■":
+        if i == 0:
+            if grid[i + 1][j] == "■":
                 return True
-        if x == len(grid) - 1:
-            if grid[x - 1][y] == "■":
+        if i == len(grid) - 1:
+            if grid[i - 1][j] == "■":
                 return True
-        if y == 0:
-            if grid[x][y + 1] == "■":
+        if j == 0:
+            if grid[i][j + 1] == "■":
                 return True
-        if y == len(grid[0]) - 1:
-            if grid[x][y - 1] == "■":
+        if j == len(grid[0]) - 1:
+            if grid[i][j - 1] == "■":
                 return True
         return False
     return True
@@ -199,12 +199,12 @@ def solve_maze(
     :param grid:
     :return:
     """
-
     exits = get_exits(grid)
     if len(exits) != 1:
         start, fin = exits
     else:
         return grid, exits
+    first_grid = deepcopy(grid)
     if not encircled_exit(grid, start) and not encircled_exit(grid, fin):
         grid[start[0]][start[1]] = 1
         grid[fin[0]][fin[1]] = 0
@@ -216,7 +216,7 @@ def solve_maze(
         while grid[fin[0]][fin[1]] == 0:
             grid = make_step(grid, k)
             k += 1
-        return grid, shortest_path(grid, fin)
+        return first_grid, shortest_path(grid, fin)
     return grid, None
 
 
@@ -224,17 +224,16 @@ def add_path_to_grid(
     grid: List[List[Union[str, int]]], path: Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]
 ) -> List[List[Union[str, int]]]:
     """
-
     :param grid:
     :param path:
     :return:
     """
 
     if path:
-        for i, row in enumerate(grid):
-            for j, _ in enumerate(row):
-                if (i, j) in path:
-                    grid[i][j] = "X"
+        for x, line in enumerate(grid):
+            for y, _ in enumerate(line):
+                if (x, y) in path:
+                    grid[x][y] = "X"
     return grid
 
 
