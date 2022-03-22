@@ -147,16 +147,3 @@ def get_mutual(
     except:
         pass
     return result
-
-
-if __name__ == "__main__":
-    friends: Union[list[int], list[MutualFriends]] = get_mutual(
-        source_uid=269738261, target_uids=[72752245]
-    )
-    friends = get_friends(269738261)
-    print(friends)
-
-if __name__ == "__main__":
-    friends = get_friends(user_id=201856650).items
-    print(friends)
-    print(get_mutual(201856650, target_uid=12141927))
