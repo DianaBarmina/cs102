@@ -3,6 +3,7 @@ import statistics
 import typing as tp
 
 from dateutil.relativedelta import relativedelta
+
 from homework05.vkapi.friends import get_friends
 
 

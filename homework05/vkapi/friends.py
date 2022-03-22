@@ -1,13 +1,13 @@
 import dataclasses
-import math
 import json
+import math
 import time
 import typing as tp
-from typing import Dict, Union, Any, List
+from typing import Any, Dict, List, Union
 
 from homework05.vkapi import config
-from homework05.vkapi.session import Session
 from homework05.vkapi.exceptions import APIError
+from homework05.vkapi.session import Session
 
 QueryParams = tp.Optional[tp.Dict[str, tp.Union[str, int]]]
 

@@ -1,14 +1,14 @@
+import json
 import textwrap
 import time
 import typing as tp
 from string import Template
-import json
 import pandas as pd
 from pandas import json_normalize
 
 from homework05.vkapi import config
-from homework05.vkapi.session import Session
 from homework05.vkapi.exceptions import APIError
+from homework05.vkapi.session import Session
 
 
 def get_posts_2500(
