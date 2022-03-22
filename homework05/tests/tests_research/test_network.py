@@ -2,6 +2,7 @@ import re
 import unittest
 
 import responses
+
 from homework05.research.network import ego_network
 
 

@@ -3,6 +3,7 @@ import time
 import unittest
 
 import responses
+
 from homework05.vkapi.friends import FriendsResponse, get_friends, get_mutual
 
 
