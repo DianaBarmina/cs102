@@ -16,16 +16,41 @@ class Session:
     """
 
     def __init__(
-        self,
-        base_url: str,
-        timeout: float = 5.0,
-        max_retries: int = 3,
-        backoff_factor: float = 0.3,
+            self,
+            base_url: str,
+            timeout: float = 5.0,
+            max_retries: int = 3,
+            backoff_factor: float = 0.3,
     ) -> None:
-        pass
+
+        self.base_url = base_url
+        self.timeout = timeout
+        self.ses = requests.Session()
+
+        st_ls = []
+        for i in range(400, 600):
+            st_ls.append(i)
+
+        retry = Retry(total=max_retries,
+                      status_forcelist=st_ls,
+                      backoff_factor=backoff_factor,
+                      allowed_methods=["GET", "POST"])
+
+        adapter = HTTPAdapter(max_retries=retry)
+        self.ses.mount(base_url, adapter)
 
     def get(self, url: str, *args: tp.Any, **kwargs: tp.Any) -> requests.Response:
-        pass
+        if "timeout" in kwargs:
+            kwargs["timeout"] = kwargs["timeout"]
+        else:
+            kwargs["timeout"] = self.timeout
+        response = self.ses.get(self.base_url + "/" + url, *args, **kwargs)
+        return response
 
     def post(self, url: str, *args: tp.Any, **kwargs: tp.Any) -> requests.Response:
-        pass
+        if "timeout" in kwargs:
+            self.timeout = kwargs["timeout"]
+
+        return_ = self.ses.post(self.base_url + "/" + url, *args, **kwargs)
+
+        return return_
