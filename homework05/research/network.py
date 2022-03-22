@@ -5,7 +5,8 @@ import community as community_louvain
 import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
-from homework05.vkapi.friends import get_friends, get_mutual
+
+#from homework05.vkapi.friends import get_friends, get_mutual
 
 
 def ego_network(
