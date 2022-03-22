@@ -16,11 +16,11 @@ class Session:
     """
 
     def __init__(
-            self,
-            base_url: str,
-            timeout: float = 5.0,
-            max_retries: int = 3,
-            backoff_factor: float = 0.3,
+        self,
+        base_url: str,
+        timeout: float = 5.0,
+        max_retries: int = 3,
+        backoff_factor: float = 0.3,
     ) -> None:
 
         self.base_url = base_url
@@ -31,10 +31,12 @@ class Session:
         for i in range(400, 600):
             st_ls.append(i)
 
-        retry = Retry(total=max_retries,
-                      status_forcelist=st_ls,
-                      backoff_factor=backoff_factor,
-                      allowed_methods=["GET", "POST"])
+        retry = Retry(
+            total=max_retries,
+            status_forcelist=st_ls,
+            backoff_factor=backoff_factor,
+            allowed_methods=["GET", "POST"],
+        )
 
         adapter = HTTPAdapter(max_retries=retry)
         self.ses.mount(base_url, adapter)

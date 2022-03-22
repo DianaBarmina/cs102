@@ -19,7 +19,7 @@ class FriendsResponse:
 
 
 def get_friends(
-        user_id: int, count: int = 5000, offset: int = 0, fields: tp.Any = None
+    user_id: int, count: int = 5000, offset: int = 0, fields: tp.Any = None
 ) -> FriendsResponse:
     """
     Получить список идентификаторов друзей пользователя или расширенную информацию
@@ -67,13 +67,13 @@ class MutualFriends(tp.TypedDict):
 
 
 def get_mutual(
-        source_uid: tp.Optional[int] = None,
-        target_uid: tp.Optional[int] = None,
-        target_uids: tp.Optional[tp.List[int]] = None,
-        order: str = "",
-        count: tp.Optional[int] = None,
-        offset: int = 0,
-        progress=None,
+    source_uid: tp.Optional[int] = None,
+    target_uid: tp.Optional[int] = None,
+    target_uids: tp.Optional[tp.List[int]] = None,
+    order: str = "",
+    count: tp.Optional[int] = None,
+    offset: int = 0,
+    progress=None,
 ) -> tp.Union[tp.List[int], tp.List[MutualFriends]]:
     """
     Получить список идентификаторов общих друзей между парой пользователей.
@@ -150,7 +150,9 @@ def get_mutual(
 
 
 if __name__ == "__main__":
-    friends: Union[list[int], list[MutualFriends]] = get_mutual(source_uid=269738261, target_uids=[72752245])
+    friends: Union[list[int], list[MutualFriends]] = get_mutual(
+        source_uid=269738261, target_uids=[72752245]
+    )
     friends = get_friends(269738261)
     print(friends)
 
@@ -158,4 +160,3 @@ if __name__ == "__main__":
     friends = get_friends(user_id=201856650).items
     print(friends)
     print(get_mutual(201856650, target_uid=12141927))
-

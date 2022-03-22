@@ -21,8 +21,8 @@ def ego_network(
     friends_list = []
     mut_friends = get_mutual(source_uid=user_id, target_uids=friends)
     for some_friend in mut_friends:
-        id_s_friend = some_friend["id"] # type: ignore
-        for com_fr in some_friend["common_friends"]: # type: ignore
+        id_s_friend = some_friend["id"]  # type: ignore
+        for com_fr in some_friend["common_friends"]:  # type: ignore
             friends_list.append((id_s_friend, com_fr))
 
     return friends_list
@@ -73,6 +73,7 @@ def describe_communities(
                     data.append([cluster_n] + [friend.get(field) for field in fields])  # type: ignore
                     break
     return pd.DataFrame(data=data, columns=["cluster"] + fields)
+
 
 if __name__ == "__main__":
     net = ego_network(user_id=8086326)

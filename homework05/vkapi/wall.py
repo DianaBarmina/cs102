@@ -13,28 +13,28 @@ from homework05.vkapi.session import Session
 
 
 def get_posts_2500(
-        owner_id: str = "",
-        domain: str = "",
-        offset: int = 0,
-        count: int = 10,
-        max_count: int = 2500,
-        filter: str = "owner",
-        extended: int = 0,
-        fields: tp.Optional[tp.List[str]] = None,
+    owner_id: str = "",
+    domain: str = "",
+    offset: int = 0,
+    count: int = 10,
+    max_count: int = 2500,
+    filter: str = "owner",
+    extended: int = 0,
+    fields: tp.Optional[tp.List[str]] = None,
 ) -> tp.Dict[str, tp.Any]:
     pass
 
 
 def get_wall_execute(
-        owner_id: str = "",
-        domain: str = "",
-        offset: int = 0,
-        count: int = 10,
-        max_count: int = 2500,
-        filter: str = "owner",
-        extended: int = 0,
-        fields: tp.Optional[tp.List[str]] = None,
-        progress=None,
+    owner_id: str = "",
+    domain: str = "",
+    offset: int = 0,
+    count: int = 10,
+    max_count: int = 2500,
+    filter: str = "owner",
+    extended: int = 0,
+    fields: tp.Optional[tp.List[str]] = None,
+    progress=None,
 ) -> pd.DataFrame:
     """
     Возвращает список записей со стены пользователя или сообщества.
@@ -61,7 +61,8 @@ def get_wall_execute(
 
     for i in range(lenn_):
         try:
-            code = Template("""var k = 0;
+            code = Template(
+                """var k = 0;
                             var post = [];
                             while(k < $trying){
                             post = post + API.wall.get({"owner_id":$owner_id,
@@ -74,19 +75,15 @@ def get_wall_execute(
                                                         "v":$version})["items"];
                                                         k=k+1;}
                             return {"count": posts.length,
-                                    "items": posts};""").substitute(
+                                    "items": posts};"""
+            ).substitute(
                 owner_id=owner_id,
                 domain=domain,
                 offset=offset + max_count * i,
-
-                count=count - max_count * i
-                if count - max_count * i < 101
-                else 100,
-
+                count=count - max_count * i if count - max_count * i < 101 else 100,
                 trying=(count - max_count * i - 1) // 100 + 1
                 if count - max_count * i < max_count + 1
                 else max_count // 100,
-
                 filter=filter,
                 extended=extended,
                 fields=fields,
@@ -95,9 +92,8 @@ def get_wall_execute(
 
             taken_posts = inizio.post(
                 "execute",
-                data={"code": code,
-                      "access_token": access_token,
-                      "v": version}, )
+                data={"code": code, "access_token": access_token, "v": version},
+            )
 
             time.sleep(1)
 

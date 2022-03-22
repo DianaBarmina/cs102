@@ -21,7 +21,7 @@ def age_predict(user_id: int) -> tp.Optional[float]:
     for friend in friends_list.items:
         print(friend)
         try:
-            date_of_birth = friend["bdate"].split(".") # type: ignore
+            date_of_birth = friend["bdate"].split(".")  # type: ignore
             if len(date_of_birth) == 3:
                 age = today_year - int(date_of_birth[2])
                 age_list.append(age)
@@ -32,6 +32,7 @@ def age_predict(user_id: int) -> tp.Optional[float]:
     else:
         response = statistics.median(age_list)
         return response
+
 
 if __name__ == "__main__":
     print(age_predict(user_id=8086321))
