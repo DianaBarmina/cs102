@@ -18,4 +18,4 @@ class News(Base):
     label = Column(String)
 
 
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)  # type: ignore
