@@ -6,7 +6,7 @@ from urllib.parse import unquote
 import pandas as pd
 import responses
 
-from vkapi.wall import get_wall_execute
+from homework05.vkapi.wall import get_wall_execute
 
 
 class GetWallTestCase(unittest.TestCase):
@@ -63,7 +63,7 @@ class GetWallTestCase(unittest.TestCase):
             status=200,
         )
         start = time.time()
-        with patch("vkapi.wall.get_posts_2500") as get_posts_2500:
+        with patch("homework05.vkapi.wall.get_posts_2500") as get_posts_2500:
             get_posts_2500.return_value = []
             _ = get_wall_execute(domain="cs102py", count=6000)
         end = time.time()
